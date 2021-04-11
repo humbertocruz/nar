@@ -1,5 +1,4 @@
-# nar
-NAR - NextJS Auto Rest
+# NAR - NextJS Auto Rest
 
 Automatic REST API for NextJS and Prisma.io
 
