@@ -26,7 +26,28 @@ export default async (req:any, res:any) => {
             case 'OPTIONS':
                 res.status(200).send('')
                 break
-            
+            case 'GET': // GET REQUEST - READ ONE
+                try {
+                    let data = await prisma[query.model].findUnique({where:{id:query.id}})
+                    
+                    delete data.password // user.password should never be listed
+                    delete data.token // user.token should never be listed
+
+                    // return json with data
+                    return res.status(200).json({
+                        succes:true, // status
+                        method:method, // method used
+                        data:data, // data
+                    })
+                } catch(err){
+                    console.log(err)
+                    return res.status(500).json({ // server error 500
+                        succes:false,
+                        method:method,
+                        err:err
+                    })
+                }
+                break
             case 'PUT': // PUT REQUEST - Update
                 try {
                     const data = await prisma[query.model].update({data:body,where:{id:query.id}})
