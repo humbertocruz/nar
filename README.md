@@ -2,7 +2,7 @@
 
 Automatic REST API for NextJS and Prisma.io
 
-- checkoout this repo
+- clone this repo
 - run yarn
 - change prisma/schema.prisma to your database schema and connection url ( you may use enviroment vars )
 - run npx prisma db push --preview-feature
