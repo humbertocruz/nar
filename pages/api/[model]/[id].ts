@@ -1,5 +1,5 @@
-import prisma from './_prisma' // prisma client
-import { checkToken } from './_auth' // auth mechanism
+import prisma from '../_prisma' // prisma client
+import { checkToken } from '../_auth' // auth mechanism
 
 export default async (req:any, res:any) => {
     const body = req.body;
@@ -26,32 +26,14 @@ export default async (req:any, res:any) => {
             case 'OPTIONS':
                 res.status(200).send('')
                 break
-            case 'GET': // GET REQUEST - READ
+            
+            case 'PUT': // PUT REQUEST - Update
                 try {
-                    let options = {} // prisma options init
-                    if (query.take) options.take = parseInt(query.take) // take option
-                    if (query.skip) options.skip = parseInt(query.skip) // skip option
-                    if (query.include) { // include option
-                        let include = query.include.split(',')
-                        //@ts-ignoretsignore
-                        options.include = {} // prisma include init
-                        //@ts-ignoretsignore
-                        include.map((i)=>options.include[i]=true) // add includes
-                    }
-                    let data = await prisma[query.model].findMany(options) // array of data from model with options
-                    let ret = [] // init empty array return variable
-                    // remove some fields from data
-                    data.map((d)=>{
-                        delete d.password // user.password should never be listed
-                        delete d.token // user.token should never be listed
-                        ret.push(d)
-                    })
-                    // return json with data
-                    return res.status(200).json({
-                        succes:true, // status
-                        method:method, // method used
-                        data:ret, // data
-                        total: await prisma[query.model].count() // model count for pagination
+                    const data = await prisma[query.model].update({data:body,where:{id:query.id}})
+                    // return json result
+                    return res.json({
+                        succes:true,  //status
+                        method:method, // method
                     })
                 } catch(err){
                     console.log(err)
@@ -62,9 +44,9 @@ export default async (req:any, res:any) => {
                     })
                 }
                 break
-            case 'POST': // POST REQUEST - Create
+            case 'DELETE': // DELETE REQUEST - Delete
                 try {
-                    const data = await prisma.user.create({data:body}) // create record from body data
+                    const data = await prisma[query.model].delete({where:{id:query.id}}) // delete record id
                     // return json result
                     return res.json({
                         succes:true,  //status

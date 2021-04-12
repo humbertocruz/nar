@@ -22,7 +22,7 @@
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx"
-, "pages/api/[model].ts", "pages/api/_prisma.ts"  ],
+, "pages/api/index.ts", "pages/api/_prisma.ts"  ],
   "exclude": [
     "node_modules"
   ]
