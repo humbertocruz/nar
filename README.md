@@ -17,7 +17,7 @@ This will create your database tables and a REST API will be available for each 
 - use prisma include on api url to add connections to others tables
 - prisma take and skip to paginate
 - the user table with token auth is automaticaly created and a POST /api/login with email/password route will take care of auth and
-token creationg
+token creation
 - consequent access will require a "Authorization: Bearer TOKEN" header to allow access
 
 Examples
