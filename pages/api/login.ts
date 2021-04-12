@@ -10,15 +10,16 @@ export default async (req, res) => {
      */
     const body = req.body
     const method = req.method
+    const prisma = new PrismaClient({
+        errorFormat: 'minimal',
+    });
 
     switch(method){
       
       case 'POST':
 
           try {
-            const prisma = new PrismaClient({
-              errorFormat: 'minimal',
-            });
+            
             // search user by email
             const login = await prisma.user.findUnique({
                 where:{
