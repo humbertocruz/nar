@@ -28,7 +28,7 @@ export default async (req:any, res:any) => {
                 break
             case 'GET': // GET REQUEST - READ
                 try {
-                    let options = {} // prisma options init
+                    let options: any = {} // prisma options init
                     if (query.take) options.take = parseInt(query.take) // take option
                     if (query.skip) options.skip = parseInt(query.skip) // skip option
                     if (query.include) { // include option
