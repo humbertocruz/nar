@@ -23,7 +23,7 @@ token creationg
 Examples
 
 - /api/user - get all users from database
-- /api/user?take=10&skip=9 - get 10 users starting from the 10h ( pagination )
+- /api/user?take=10&skip=9 - get 10 users starting from the 10th ( pagination )
 - /api/user?include=Access - get all users and the access entries from each user on user field "access"
 - /api/access?include=User - get all access and the user of each one
 - /api/user/123123 - get user id = 123123
