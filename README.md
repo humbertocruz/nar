@@ -30,3 +30,8 @@ Examples
 - DELETE /api/user/123123 - delete user id = 123123
 - PUT /api/user/123123 - update user id = 123123 ( updateds fields on request body )
 - POST /api/user - create a new user ( insert fields on request body )
+
+TODO
+
+- searching
+- orderBy
