@@ -38,6 +38,15 @@ export default async (req:any, res:any) => {
                         //@ts-ignoretsignore
                         include.map((i)=>options.include[i]=true) // add includes
                     }
+                    if (query.where) {
+                        const where = JSON.parse(query.where)
+                        options.where = {...where}
+                    }
+                    if (query.orderBy) {
+                        const orderBy = query.orderBy.split('|')
+                        options.orderBy = {}
+                        options.orderBy[orderBy[0]] = orderBy[1]
+                    }
                     let data = await prisma[query.model].findMany(options) // array of data from model with options
                     let ret = [] // init empty array return variable
                     // remove some fields from data
